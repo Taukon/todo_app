@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once(__DIR__ . '/../../todo/class/Todo.php');
-//require_once(__DIR__ . '/../../todo/class/User.php');
 require_once(__DIR__ . '/test.php');
 
 use PHPUnit\Framework\TestCase;
@@ -59,11 +58,9 @@ class TodoTest extends TestCase{
         $todo = new Todo();
         $array = $todo->getAllTodo();
         //$task = array_shift($array);
-        //$task = key(array_slice($array, 0, 1, true));
         $task = end($array);
 
         $this->assertSame(true, $todo->deleteTodo($task['id']));
-        //$this->assertSame(true, $todo->deleteTodo());
 
         //test::logout();
         $_SESSION = array();
