@@ -46,7 +46,7 @@ class Todo extends Dbc{
 
     /**
      * タスクを削除
-     * @param string $id
+     * @param int $id
      * @return bool $result|false
      */
     public static function deleteTodo($id){
@@ -67,7 +67,7 @@ class Todo extends Dbc{
 
     /**
      * idからタスクがあるかチェック
-     * @param string $id
+     * @param int $id
      * @return bool $result|false
      */
     public static function checkTodoById($id){
