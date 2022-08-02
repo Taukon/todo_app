@@ -1,5 +1,5 @@
 <?php
-require_once('../config/env.php');
+require_once(__DIR__ . '/../config/env.php');
 
 class Dbc{
     /**
