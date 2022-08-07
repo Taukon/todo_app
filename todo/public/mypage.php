@@ -15,6 +15,8 @@ $login_user = $_SESSION['login_user'];
 
 $err = isset($_SESSION['todo_err']) ? $_SESSION['todo_err'] : [];
 unset($_SESSION['todo_err']);
+
+$csrf_token = Utils::setToken();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +55,7 @@ unset($_SESSION['todo_err']);
     <?php endforeach ?>
 <?php endif ?>
     <form action="../routing/todo.php" method="POST">
+        <input type="hidden" name="csrf_token" value="<?php echo Utils::h($csrf_token) ?>">
         <input type="text" name="title" >
         <input type="submit" value="Add">
     </form>
@@ -71,6 +74,7 @@ foreach($list as $row) :
                     <form method="post" action="../routing/todo.php">
                         <button type="submit" name="delete">Delete</button>
                         <input type="hidden" name="id" value="<?php echo Utils::h($row['id']) ?>">
+                        <input type="hidden" name="csrf_token" value="<?php echo Utils::h($csrf_token) ?>">
                         <input type="hidden" name="delete" value="true">
                     </form>
                 </td>

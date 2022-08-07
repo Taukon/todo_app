@@ -10,6 +10,13 @@ if(!$result){
     return;
 }
 
+$token = filter_input(INPUT_POST, 'csrf_token');
+if(!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']){  //不正なリクエスト
+    header('Location: ../public/login_form.php');
+    return;
+}
+unset($_SESSION['csrf_token']);
+
 $err = [];
 
 if($title = filter_input(INPUT_POST, 'title')){

@@ -12,7 +12,7 @@ class Utils{
     }
 
     /**
-     * CSRF対策
+     * CSRF対策 + 二重送信防止
      * @param void
      * @return string $csrf_token
      */
