@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once('../class/User.php');
-require_once('../class/Utils.php');
+require_once("../../vendor/autoload.php");
+use Taukon\TodoApp\Classes\User;
+use Taukon\TodoApp\Classes\Utils;
 
 $result = User::checkLogin();
 if($result){
@@ -38,7 +39,7 @@ session_destroy();
     <?php if(isset($err['msg'])) : ?>
             <p><?php echo Utils::h($err['msg']) ?></p>
     <?php endif; ?>
-    <form action="../routing/login.php" method="POST">
+    <form action="../Routing/login.php" method="POST">
     <p>
         <label for="name">ユーザ名：</label>
         <input type="text" name="name">

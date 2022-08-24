@@ -1,12 +1,13 @@
 <?php
 session_start();
-require_once('../class/User.php');
+require_once("../../vendor/autoload.php");
+use Taukon\TodoApp\Classes\User;
 
 $err = [];
 
 $token = filter_input(INPUT_POST, 'csrf_token');
 if(!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']){  //不正なリクエスト
-    header('Location: ../public/login_form.php');
+    header('Location: ../Public/login_form.php');
     return;
 }
 
@@ -36,11 +37,11 @@ if(count($err) === 0){
     }
 } else {
     $_SESSION['signup_err'] = $err;
-    header('Location: ../public/signup_form.php');
+    header('Location: ../Public/signup_form.php');
     return;
 }
 
 $_SESSION['signup_err'] = $err;
-header('Location: ../public/signup_complete.php');
+header('Location: ../Public/signup_complete.php');
 return;
 ?>

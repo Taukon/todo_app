@@ -1,0 +1,17 @@
+{
+    "name": "taukon/todo_app",
+    "autoload": {
+        "psr-4": {
+            "Taukon\\TodoApp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Taukon",
+            "email": "83957880+Taukon@users.noreply.github.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
