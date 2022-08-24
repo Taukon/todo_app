@@ -1,9 +1,9 @@
 <?php
 session_start();
 require_once("../../vendor/autoload.php");
-use Taukon\TodoApp\classes\User;
-use Taukon\TodoApp\classes\Todo;
-use Taukon\TodoApp\classes\Utils;
+use Taukon\TodoApp\Classes\User;
+use Taukon\TodoApp\Classes\Todo;
+use Taukon\TodoApp\Classes\Utils;
 
 $result = User::checkLogin();
 if(!$result){

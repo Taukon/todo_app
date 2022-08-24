@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once("../../vendor/autoload.php");
-use Taukon\TodoApp\classes\User;
-use Taukon\TodoApp\classes\Utils;
+use Taukon\TodoApp\Classes\User;
+use Taukon\TodoApp\Classes\Utils;
 
 if(!isset($_SESSION['signup_err'])){
     header('Location: login_form.php');

@@ -1,5 +1,5 @@
 <?php
-namespace Taukon\TodoApp\classes;
+namespace Taukon\TodoApp\Classes;
 
 require_once(__DIR__ . '/../config/env.php');
 

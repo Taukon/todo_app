@@ -1,6 +1,6 @@
 <?php
-namespace Taukon\TodoApp\classes;
-use Taukon\TodoApp\classes\Dbc;
+namespace Taukon\TodoApp\Classes;
+use Taukon\TodoApp\Classes\Dbc;
 
 class User extends Dbc{
 
