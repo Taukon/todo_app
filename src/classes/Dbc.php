@@ -1,5 +1,5 @@
 <?php
-
+namespace Taukon\TodoApp\classes;
 
 require_once(__DIR__ . '/../config/env.php');
 
@@ -17,9 +17,9 @@ class Dbc{
         $dsn = 'mysql:host='.$host.';dbname='.$dbname.';charset=utf8';
 
         try{
-            $dbh = new PDO($dsn, $user, $pass,[
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_EMULATE_PREPARES => false,    //prevent sql injection
+            $dbh = new \PDO($dsn, $user, $pass,[
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                \PDO::ATTR_EMULATE_PREPARES => false,    //prevent sql injection
             ]);
 
         } catch(PDOException $e){
