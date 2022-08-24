@@ -1,11 +1,12 @@
 <?php
 session_start();
-require_once('../class/User.php');
+require_once("../../vendor/autoload.php");
+use Taukon\TodoApp\Classes\User;
 
 $result = User::checkLogin();
 if(!$result){
     $_SESSION['login_err'] = 'セッションが切れましたので、ログインし直してください。';
-    header('Location: ../public/login_form.php');
+    header('Location: ../Public/login_form.php');
     return;
 }
 
@@ -13,7 +14,7 @@ $err = [];
 
 $token = filter_input(INPUT_POST, 'csrf_token');
 if(!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']){  //不正なリクエスト
-    header('Location: ../public/login_form.php');
+    header('Location: ../Public/login_form.php');
     return;
 }
 unset($_SESSION['csrf_token']);
@@ -48,11 +49,11 @@ if(count($err) === 0){
     }
 } else{
     $_SESSION['update_err'] = $err;
-    header('Location: ../public/update_form.php');
+    header('Location: ../Public/update_form.php');
     return;
 }
 
 $_SESSION['update_err'] = $err;
-header('Location: ../public/update_complete.php');
+header('Location: ../Public/update_complete.php');
 return;
 ?>

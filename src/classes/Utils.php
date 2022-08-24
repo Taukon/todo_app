@@ -1,5 +1,5 @@
 <?php
-
+namespace Taukon\TodoApp\Classes;
 class Utils{
     
     /**
