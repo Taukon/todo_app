@@ -22,6 +22,19 @@ final class UserTest extends TestCase{
         $this->assertSame(false, User::login('testuser','testtesttest'));
     }
 
+    public function testCheckLogin成功(){
+        User::login('testuser','testuser');
+        $this->assertSame(true, User::checkLogin());
+    }
+
+    public function testCheckLogin失敗(){
+        $arr = ['id' => '100',
+                'name' => 'testuser',
+                'password' => 'testuser'];
+        $_SESSION['login_user'] = $arr;
+        $this->assertSame(false, User::checkLogin());
+    }
+
     protected function tearDown(): void
     {
         $_SESSION = array();
