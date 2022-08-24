@@ -39,7 +39,7 @@ session_destroy();
     <?php if(isset($err['msg'])) : ?>
             <p><?php echo Utils::h($err['msg']) ?></p>
     <?php endif; ?>
-    <form action="../routing/login.php" method="POST">
+    <form action="../Routing/login.php" method="POST">
     <p>
         <label for="name">ユーザ名：</label>
         <input type="text" name="name">

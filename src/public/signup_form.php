@@ -30,7 +30,7 @@ unset($_SESSION['signup_err']);
 </head>
 <body class="container">
     <h2>ユーザ登録フォーム</h2>
-    <form action="../routing/register.php" method="POST">
+    <form action="../Routing/register.php" method="POST">
     <p>
         <label for="name">ユーザ名：</label>
         <input type="text" name="name">

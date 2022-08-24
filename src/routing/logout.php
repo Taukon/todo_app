@@ -6,19 +6,19 @@ use Taukon\TodoApp\Classes\User;
 $result = User::checkLogin();
 if(!$result){
     $_SESSION['login_err'] = 'セッションが切れましたので、ログインし直してください。';
-    header('Location: ../public/login_form.php');
+    header('Location: ../Public/login_form.php');
     return;
 }
 
 if(!$logout = filter_input(INPUT_POST, 'logout')){  //不正なリクエスト
-    header('Location: ../public/login_form.php');
+    header('Location: ../Public/login_form.php');
     return;
 }
 
 
 User::logout();
 
-header('Location: ../public/logout_complete.html');
+header('Location: ../Public/logout_complete.html');
 return;
 
 ?>

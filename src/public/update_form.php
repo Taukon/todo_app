@@ -34,7 +34,7 @@ unset($_SESSION['update_err']);
 </head>
 <body class="container">
     <h2>ユーザ再登録フォーム</h2>
-    <form action="../routing/update.php" method="POST">
+    <form action="../Routing/update.php" method="POST">
     <p>
         <label for="name">ユーザ名：</label>
         <input type="text" name="name" value="<?php echo Utils::h($user) ?>">

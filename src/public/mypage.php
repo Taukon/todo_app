@@ -43,7 +43,7 @@ $csrf_token = Utils::setToken();
         </form>
     </td>
     <td>
-        <form action="../routing/logout.php" method="POST">
+        <form action="../Routing/logout.php" method="POST">
             <input type="submit" name="logout" value="ログアウト">
         </form>
     </td>
@@ -55,7 +55,7 @@ $csrf_token = Utils::setToken();
         <p><?php echo Utils::h($e) ?></p>
     <?php endforeach ?>
 <?php endif ?>
-    <form action="../routing/todo.php" method="POST">
+    <form action="../Routing/todo.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo Utils::h($csrf_token) ?>">
         <input type="text" name="title" >
         <input type="submit" value="Add">
@@ -72,7 +72,7 @@ foreach($list as $row) :
             <tr>
                 <td><?php echo Utils::h($row['title']) ?></td>
                 <td>
-                    <form method="post" action="../routing/todo.php">
+                    <form method="post" action="../Routing/todo.php">
                         <button type="submit" name="delete">Delete</button>
                         <input type="hidden" name="id" value="<?php echo Utils::h($row['id']) ?>">
                         <input type="hidden" name="csrf_token" value="<?php echo Utils::h($csrf_token) ?>">
