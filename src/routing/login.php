@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../class/User.php');
+require_once('../classes/User.php');
 
 
 $err = [];

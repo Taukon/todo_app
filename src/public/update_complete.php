@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once('../class/User.php');
+require_once('../classes/User.php');
+require_once('../classes/Utils.php');
 
 $result = User::checkLogin();
 if(!$result){
@@ -8,6 +9,13 @@ if(!$result){
     header('Location: login_form.php');
     return;
 }
+
+if(!isset($_SESSION['update_err'])){
+    header('Location: login_form.php');
+    return;
+}
+$err = $_SESSION['update_err'];
+unset($_SESSION['update_err']);
 ?>
 
 <!DOCTYPE html>
@@ -16,17 +24,21 @@ if(!$result){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログイン完了</title>
+    <title>ユーザ再登録完了画面</title>
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
 </head>
 <body class="container">
-<h2>ログイン完了</h2>
+<?php if(count($err) > 0) : ?>
+    <?php foreach($err as $e) : ?>
+        <p><?php echo Utils::h($e) ?></p>
+    <?php endforeach ?>
 
-<p>ログインしました。</p>
-
-<a href="mypage.php">マイページへ</a>
+<?php else :  ?>    
+<p>ユーザ再登録が完了しました。</p>
+<?php endif ?>
+<a href="login_form.php">戻る</a>
 </body>
 </html>

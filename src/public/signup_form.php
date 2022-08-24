@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once('../class/User.php');
-require_once('../class/Utils.php');
+require_once('../classes/User.php');
+require_once('../classes/Utils.php');
 
 $result = User::checkLogin();
 if($result){

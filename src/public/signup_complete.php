@@ -1,21 +1,15 @@
 <?php
 session_start();
-require_once('../class/User.php');
-require_once('../class/Utils.php');
+require_once('../classes/User.php');
+require_once('../classes/Utils.php');
 
-$result = User::checkLogin();
-if(!$result){
-    $_SESSION['login_err'] = 'ログインしてください';
+if(!isset($_SESSION['signup_err'])){
     header('Location: login_form.php');
     return;
 }
 
-if(!isset($_SESSION['update_err'])){
-    header('Location: login_form.php');
-    return;
-}
-$err = $_SESSION['update_err'];
-unset($_SESSION['update_err']);
+$err = $_SESSION['signup_err'];
+unset($_SESSION['signup_err']);
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +18,7 @@ unset($_SESSION['update_err']);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ユーザ再登録完了画面</title>
+    <title>ユーザ登録完了画面</title>
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
@@ -37,8 +31,8 @@ unset($_SESSION['update_err']);
     <?php endforeach ?>
 
 <?php else :  ?>    
-<p>ユーザ再登録が完了しました。</p>
+<p>ユーザ登録が完了しました。</p>
 <?php endif ?>
-<a href="login_form.php">戻る</a>
+<a href="login_form.php">ログイン画面へ</a>
 </body>
 </html>

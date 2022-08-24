@@ -1,6 +1,13 @@
 <?php
 session_start();
-require_once('../class/User.php');
+require_once('../classes/User.php');
+
+$result = User::checkLogin();
+if(!$result){
+    $_SESSION['login_err'] = 'セッションが切れましたので、ログインし直してください。';
+    header('Location: ../public/login_form.php');
+    return;
+}
 
 $err = [];
 
@@ -9,12 +16,12 @@ if(!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']){  //�
     header('Location: ../public/login_form.php');
     return;
 }
-
 unset($_SESSION['csrf_token']);
+
 
 if(!$name = filter_input(INPUT_POST, 'name')){
     $err['name'] = 'ユーザ名を記入してください。';
-} elseif(User::checkUserByName($name)){
+} elseif(($name !== $_SESSION['login_user']['name']) && (User::checkUserByName($name))){
     $err['name'] = 'ユーザ名が既に使われています。';
 }
 
@@ -30,17 +37,22 @@ if(!$password_conf === $password){
 }
 
 if(count($err) === 0){
-    $hasCreated = User::createUser($_POST);
+    $hasCreated = User::updateUser($_POST);
+
     if(!$hasCreated){
-        $err[] = '登録に失敗しました。';
+        $err[] = '再登録に失敗しました。';
+    } elseif(!User::login($name, $password)){ //セッションユーザ書き換え
+        $err[] =  $_SESSION['msg'];
+        $err[] .= '再登録に失敗しました。';
+        unset($_SESSION['msg']);
     }
-} else {
-    $_SESSION['signup_err'] = $err;
-    header('Location: ../public/signup_form.php');
+} else{
+    $_SESSION['update_err'] = $err;
+    header('Location: ../public/update_form.php');
     return;
 }
 
-$_SESSION['signup_err'] = $err;
-header('Location: ../public/signup_complete.php');
+$_SESSION['update_err'] = $err;
+header('Location: ../public/update_complete.php');
 return;
 ?>
