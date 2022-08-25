@@ -59,6 +59,24 @@ class User extends Dbc{
         }
     }
 
+    /**
+     * ログインのバリデーションチェック
+     * @param array $logindata
+     * @return array $err
+     */
+    public static function validateLogin($logindata){
+        $err = [];
+
+        if(!$logindata['name']){
+            $err['name'] = 'ユーザ名を記入してください。';
+        }
+
+        if(!$logindata['password']){
+            $err['password'] = 'パスワードを記入してください。';
+        }
+
+        return $err;
+    }
 
     /**
      * ログイン処理

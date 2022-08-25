@@ -35,6 +35,26 @@ final class UserTest extends TestCase{
         $this->assertSame(false, User::checkLogin());
     }
 
+    public function testValidateLogin成功(){
+        $arr = [
+                'name' => 'testuser',
+                'password' => 'testuser'];
+        $err = [];
+        $this->assertSame($err, User::validateLogin($arr));
+    }
+
+    public function testValidateLogin失敗(){
+        $arr = [
+                'name' => '',
+                'password' => ''
+            ];
+        $err = [
+            'name' => 'ユーザ名を記入してください。',
+                'password' => 'パスワードを記入してください。'
+            ];
+        $this->assertSame($err, User::validateLogin($arr));
+    }
+
     protected function tearDown(): void
     {
         $_SESSION = array();
