@@ -55,6 +55,40 @@ final class UserTest extends TestCase{
         $this->assertSame($err, User::validateLogin($arr));
     }
 
+    public function testValidateUser成功(){
+        $arr = [
+                'name' => 'testvalidateuser',
+                'password' => 'testvalidateuser12',
+                'password_conf' => 'testvalidateuser12'
+            ];
+        $err = [];
+        $this->assertSame($err, User::validateUser($arr));
+    }
+
+    public function testValidateUser失敗_ユーザ名がすでに使用済みとパスワードエラー(){
+        $arr = [
+                'name' => 'testuser',
+                'password' => 'test',
+                'password_conf' => 'testtest'
+            ];
+        $err = [
+                'name' => 'ユーザ名が既に使われています。',
+                'password' => 'パスワードは英数字8文字以上100字以下にしてください。',
+                'password_conf' => '確認用パスワードと異なっています。'
+            ];
+        $this->assertSame($err, User::validateUser($arr));
+    }
+
+    public function testValidateUser失敗_ユーザ名なしとパスワード成功(){
+        $arr = [
+                'name' => '',
+                'password' => '123456789',
+                'password_conf' => '123456789'
+            ];
+        $err = ['name' => 'ユーザ名を記入してください。'];
+        $this->assertSame($err, User::validateUser($arr));
+    }
+
     protected function tearDown(): void
     {
         $_SESSION = array();
