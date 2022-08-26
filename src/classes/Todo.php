@@ -79,11 +79,34 @@ class Todo extends Dbc{
 
         try{
             $stmt = parent::dbConnect()->prepare($sql);
-            $result = $stmt->execute($arr);
+            $stmt->execute($arr);
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $result;
         } catch(\EXception $e){
             return false;
         }
+    }
+
+    /**
+     * タスクのバリデーションチェック
+     * @param array $data
+     * @return array $err
+     */
+    public static function validateTodo($data){
+        $err = [];
+
+        if($data['title']){
+            if(!self::createTodo($data)){
+                $err[] = 'タスクを作成できませんでした。';
+            }
+
+        } elseif($data['delete'] && $data['id']){
+            if(!self::deleteTodo($data['id'])){
+                $err[] = 'タスクを削除できませんでした。';
+            }
+        }
+
+        return $err;
     }
 }
 ?>

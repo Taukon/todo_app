@@ -18,20 +18,7 @@ if(!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']){  //�
 }
 unset($_SESSION['csrf_token']);
 
-$err = [];
-
-if($title = filter_input(INPUT_POST, 'title')){
-    if(!Todo::createTodo($_POST)){
-        $err[] = 'タスクを作成できませんでした。';
-    }
-
-} elseif($delete = filter_input(INPUT_POST, 'delete') && $id = filter_input(INPUT_POST, 'id')){
-    if(!Todo::deleteTodo($id)){
-        $err[] = 'タスクを削除できませんでした。';
-    }
-}
-
-$_SESSION['todo_err'] = $err;
+$_SESSION['todo_err'] = Todo::validateTodo($_POST);
 header('Location: ../Public/mypage.php');
 return;
 
