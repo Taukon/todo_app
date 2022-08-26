@@ -4,15 +4,8 @@ require_once("../../vendor/autoload.php");
 use Taukon\TodoApp\Classes\User;
 
 
-$err = [];
 
-if(!$name = filter_input(INPUT_POST, 'name')){
-    $err['name'] = 'ユーザ名を記入してください。';
-}
-
-if(!$password=filter_input(INPUT_POST, 'password')){
-    $err['password'] = 'パスワードを記入してください。';
-}
+$err = User::validateLogin($_POST);
 
 if(count($err) > 0){
     $_SESSION = $err;
@@ -20,7 +13,7 @@ if(count($err) > 0){
     return;
 }
 
-$result = User::login($name, $password);
+$result = User::login($_POST['name'], $_POST['password']);
 
 if(!$result){
     header('Location: ../Public/login_form.php');
