@@ -85,6 +85,31 @@ class User extends Dbc{
     }
 
     /**
+     * 再登録時のバリデーションチェック
+     * @param array $data
+     * @return array $err
+     */
+    public static function validateUpdate($data){
+        $err = [];
+
+        if(!$data['name']){
+            $err['name'] = 'ユーザ名を記入してください。';
+        } elseif(($data['name'] !== $_SESSION['login_user']['name']) && (User::checkUserByName($data['name']))){
+            $err['name'] = 'ユーザ名が既に使われています。';
+        }
+
+        if(!preg_match("/\A[a-z\d]{8,100}+\z/i", $data['password'])){   //正規表現
+            $err['password'] = 'パスワードは英数字8文字以上100字以下にしてください。';
+        }
+
+        if(($data['password_conf'] !== $data['password'])){
+            $err['password_conf'] = '確認用パスワードと異なっています。';
+        }
+
+        return $err;
+    }
+
+    /**
      * ログインのバリデーションチェック
      * @param array $logindata
      * @return array $err
